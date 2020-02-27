@@ -15,14 +15,16 @@ melbourne_data = pd.read_csv(melbourne_path)
 filtered_data = melbourne_data.dropna(axis=0)
 
 # Choose target
-y = filtered_data.Price
+y = filtered_data.head(4000).Price
 
 # Choose features to predict target
 melbourne_data_features = ['Rooms', 'Bathroom', 'Landsize', 'BuildingArea', 'YearBuilt', 'Lattitude', 'Longtitude']
-x = filtered_data[melbourne_data_features]
+x = filtered_data[melbourne_data_features].head(4000)
 
 #splitting data into training and validation data
 train_x, val_x, train_y, val_y = train_test_split(x, y, random_state=0)
+
+print("dataframe size {} train x {} val x {} train y {} val y {}".format(filtered_data.shape, len(train_x), len(val_x), len(train_y), len(val_y)))
 
 #Define model
 melbourne_model = DecisionTreeRegressor()
