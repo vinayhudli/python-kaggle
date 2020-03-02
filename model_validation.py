@@ -48,3 +48,12 @@ def get_mae(max_leaf_nodes=None):
 
 for max_leaf in [5, 50, 250, 300, 350, 400, 450, 500, 550, 5000]:
     print ("for leaf {} mean absolute error {}".format(max_leaf, get_mae(max_leaf)))
+
+
+#Using Randomforest for prediction
+from sklearn.ensemble import RandomForestRegressor
+
+forest_model = RandomForestRegressor(random_state=1)
+forest_model.fit(X=train_x, y=train_y)
+predicted_prices = forest_model.predict(X=val_x)
+print("mean absolute error ",mean_absolute_error(y_true=val_y, y_pred=predicted_prices))
